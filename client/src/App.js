@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import React, { Component } from 'react';
 import Summary from './Components/Summary'
 import Breakdown from './Components/Breakdown'
 import News from './Components/News'
@@ -11,28 +10,30 @@ import {
   Switch,
   Route} from 'react-router-dom';
 
-const darkModeCookieTag = 'darkMode'
-
 export class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {news : [[]]}
-  }
-  theme = () => (createMuiTheme({
-    palette: {
-      type: "dark"
+    state = {
+        users: []
     }
-  }));
-  render() {
-    return (
-          <div className= 'App'>
-            <Summary/>
-            <News news = {this.state.news}/>
-            <Breakdown/>
-          </div>
-    );
-  }
 
+    componentDidMount() {
+        fetch('/users')
+            .then(res => res.json())
+            .then(users => this.setState({ users }));
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <h1>Users</h1>
+                {this.state.users.map(user =>
+                    <div key={user.id}>{user.username}</div>
+                )}
+                <Summary/>
+                <News news = {this.state.news}/>
+                <Breakdown/>
+            </div>
+        );
+    }
 }
 
 
