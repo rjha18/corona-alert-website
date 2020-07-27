@@ -1,26 +1,39 @@
-import React from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Summary from './Components/Summary'
+import Breakdown from './Components/Breakdown'
+import News from './Components/News'
+import {ThemeProvider, createMuiTheme} from '@material-ui/core/styles'
+import { Paper } from '@material-ui/core';
+import {
+  HashRouter as Router,
+  Switch,
+  Route} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const darkModeCookieTag = 'darkMode'
+
+export class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {news : [[]]}
+  }
+  theme = () => (createMuiTheme({
+    palette: {
+      type: "dark"
+    }
+  }));
+  render() {
+    return (
+          <div className= 'App'>
+            <Summary/>
+            <News news = {this.state.news}/>
+            <Breakdown/>
+          </div>
+    );
+  }
+
 }
 
-export default App;
+
+export default App
