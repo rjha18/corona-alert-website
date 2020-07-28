@@ -21,7 +21,7 @@ def main():
     # Body is a byte string.
     # We have to know the encoding in order to print it to a text file
     # such as standard output.
-    html_text = body.decode()
+    html_text = body.decode("utf-8")
 
     parsed_html = BeautifulSoup(html_text, 'html.parser')
 
@@ -33,11 +33,14 @@ def main():
         arr = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', plain_text)
         if (len(plain_text) != 0) :
             for sentence in arr :
-                sentence_list.append(sentence)
+                sentence_list.append(removeUnicode(sentence))
 
     json_arr = json.dumps(sentence_list)
     print(json_arr)
 
+
+def removeUnicode(str) :
+    return str.replace(u"\u2014", "-").replace("\u2019", "'").replace("\u2018", "'").replace("\u201c", '"').replace("\u201d", '"')
 
 if __name__ == "__main__" :
     main()
