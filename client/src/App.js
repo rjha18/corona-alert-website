@@ -19,7 +19,7 @@ export class App extends Component {
     }
     theme = () => createMuiTheme({
       palette: {
-        type: "dark"
+        type: "light"
       }
     });
 
