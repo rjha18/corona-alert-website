@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import Summary from './Components/Summary'
 import Breakdown from './Components/Breakdown'
 import News from './Components/News'
+import EmailEntry from './Components/EmailEntry'
 import {ThemeProvider, createMuiTheme} from '@material-ui/core/styles'
-import { Paper } from '@material-ui/core';
+import { Paper, Typography } from '@material-ui/core';
 import {
   HashRouter as Router,
   Switch,
@@ -19,7 +20,7 @@ export class App extends Component {
     }
     theme = () => createMuiTheme({
       palette: {
-        type: "dark"
+        type: "light"
       }
     });
 
@@ -30,22 +31,20 @@ export class App extends Component {
         fetch('/news')
         .then(res => res.json())
         .then(news => this.setState({ news }));
-          
     }
 
     render() {
         return (
-          <ThemeProvider theme = {this.theme()}>          
-            <Paper style = {{borderRadius: '0px'}}>
+          <ThemeProvider theme = {this.theme()}> 
+            <Paper>
+              <Typography variant = "h2" align = "center">Coronavirus Alert Website</Typography>    
               <div className="App">
-                  {this.state.users.map(user =>
-                      <div key={user.id}>{user.username}</div>
-                  )}
                   <Summary/>
+                  <EmailEntry/>
                   <News news = {this.state.news}/>
                   <Breakdown/>
               </div>
-            </Paper>
+            </Paper>     
           </ThemeProvider>
 
 
