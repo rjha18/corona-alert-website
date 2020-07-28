@@ -4,7 +4,7 @@ import NewsBox from './NewsBox'
 export class News extends Component {
     render() {
         return (
-            <div style = {{flexWrap : 'wrap', flex: 'auto', borderBottomStyle: 'solid', borderColor: 'black'}}>
+            <div class = 'row' style = {{borderBottomStyle: 'solid', borderColor: 'black'}}>
                 {this.props.news.map((singleArticle) => (
                     <NewsBox key = {singleArticle.url} thumbnail = {singleArticle.thumbnail} 
                     url = {singleArticle.url}
