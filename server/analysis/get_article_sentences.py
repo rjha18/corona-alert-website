@@ -1,9 +1,8 @@
-from html.parser import HTMLParser
 import pycurl
 from io import BytesIO
 from bs4 import BeautifulSoup
 import re
-import sys
+import sys 
 import json
 
 def main():
