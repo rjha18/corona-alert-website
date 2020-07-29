@@ -3,7 +3,7 @@ import pycurl
 from io import BytesIO
 from bs4 import BeautifulSoup
 import re
-import sys
+import sys 
 import json
 
 def main():
@@ -44,4 +44,3 @@ def removeUnicode(str) :
 
 if __name__ == "__main__" :
     main()
-
