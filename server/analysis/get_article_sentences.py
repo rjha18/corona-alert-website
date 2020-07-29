@@ -34,8 +34,12 @@ def main():
             for sentence in arr :
                 sentence_list.append(removeUnicode(sentence))
 
-    json_arr = json.dumps(sentence_list)
-    print(json_arr)
+    str = ""
+    for x in sentence_list :
+        str = str + x + " "
+
+    f = open('output.txt', 'w')
+    f.write(str)
 
 
 def removeUnicode(str) :
