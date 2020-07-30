@@ -35,7 +35,9 @@ router.post('/', function(req,res,next){
     } else {
       console.log('Email sent : ' + info.response);
     }
-  }).catch();
+  }).catch(function(e){
+    console.log(e)
+  });
 })
 
 module.exports = router;
