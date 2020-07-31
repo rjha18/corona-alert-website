@@ -4,6 +4,7 @@ import Summary from './Components/Summary'
 import Breakdown from './Components/Breakdown'
 import News from './Components/News'
 import EmailEntry from './Components/EmailEntry'
+import Advice from './Components/Advice'
 import {ThemeProvider, createMuiTheme} from '@material-ui/core/styles'
 import { Paper, Typography } from '@material-ui/core';
 import {
@@ -16,13 +17,18 @@ export class App extends Component {
       super(props);
       this.state = {
         users: [],
-        news: []};
+        news: [],
+        signedUp: true};
     }
     theme = () => createMuiTheme({
       palette: {
         type: "light"
       }
     });
+
+    emailSignedUp = () => {
+      this.setState({signedUp: true});
+    }
 
     componentDidMount() {
         fetch('/users')
@@ -31,18 +37,24 @@ export class App extends Component {
         fetch('/news')
         .then(res => res.json())
         .then(news => this.setState({ news }));
+        let email = localStorage.getItem('email');
+        this.setState({signedUp: email != null});
     }
 
     render() {
+      console.log(this.state.users)
         return (
           <ThemeProvider theme = {this.theme()}> 
             <Paper>
               <Typography variant = "h2" align = "center">Coronavirus Alert Website</Typography>    
               <div className="App">
-                  <Summary/>
-                  <EmailEntry/>
-                  <News news = {this.state.news}/>
-                  <Breakdown/>
+                <Advice/>
+                <News news = {this.state.news}/>
+                <Summary/>
+                {this.state.signedUp ? null:  <EmailEntry signUp = {this.emailSignedUp}/>}
+                <Breakdown/>
+                <div>Icon made by SmashIcons and Freepik</div>
+
               </div>
             </Paper>     
           </ThemeProvider>
