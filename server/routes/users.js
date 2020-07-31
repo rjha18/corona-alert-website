@@ -27,8 +27,8 @@ router.post('/', function(req,res,next){
   transporter.sendMail({
     from: 'softengvvoles@gmail.com',
     to: req.body.email,
-    subject: 'test',
-    text: 'ooga chaka'
+    subject: 'Corona alert signup',
+    text: 'Thank you for signing up to corona alerts'
   }, function(error, info){
     if (error){
       console.log(error);
